@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.1.2] — 2026-06-25
+
+### Fixed
+- Repaired the GitHub Actions CI workflow.
+- Added the missing `requirements.txt` dependency file.
+- Added the missing `quark_ingest.py` ingestion module.
+- Added pytest coverage for core scoring, ingestion, and production node behavior.
+- Added validation to the core scoring model.
+- Improved production node startup validation and storage path creation.
+- Corrected contributor ownership typo in `CONTRIBUTING.md`.
+- Updated `README.md` so it separates implemented features from planned features.
+- Added `pyproject.toml` and `.gitignore`.
+- Simplified Dependabot configuration.
+
 ## [v1.1.1] — 2026-04-10
 
 ### Changed
