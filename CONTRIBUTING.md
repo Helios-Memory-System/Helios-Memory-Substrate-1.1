@@ -10,7 +10,7 @@ This project is licensed under the **PolyForm Noncommercial License 1.0.0 with C
 
 By submitting a contribution (pull request, patch, issue, or any other form of contribution) to this project, you agree that:
 
-1. **Your contribution is licensed to the project owner (Thomas Papenbrock) under the same license that governs this project** — the PolyForm Noncommercial License 1.0.0 with Commons Clause. This is the "inbound = outbound" principle: the license you receive to use this project is the same license under which you contribute back.
+1. **Your contribution is licensed to the project owner (Travis Papenbrock) under the same license that governs this project** — the PolyForm Noncommercial License 1.0.0 with Commons Clause. This is the "inbound = outbound" principle: the license you receive to use this project is the same license under which you contribute back.
 2. You have the right to submit your contribution under these terms (i.e., you own the code or have permission to contribute it).
 3. You grant the project owner a perpetual, worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and distribute your contribution as part of the project.
 
