@@ -1,16 +1,17 @@
-
-[![Build Status](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/actions/workflows/main.yml/badge.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/actions/workflows/main.yml) [![License](https://img.shields.io/github/license/tpappy83/Helios-Memory-Substrate-1.1.svg)](LICENSE) [![Issues](https://img.shields.io/github/issues/tpappy83/Helios-Memory-Substrate-1.1.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/issues) [![Stars](https://img.shields.io/github/stars/tpappy83/Helios-Memory-Substrate-1.1.svg)](https://github.com/tpappy83/Helios-Memory-Substrate-1.1/stargazers)
-
 # Helios Memory Substrate
 
-Helios Memory Substrate is a distributed, high-performance memory architecture designed to support long-context AI systems, agentic workflows, and large-scale vector-based retrieval. It provides a tiered substrate for ingesting, indexing, scoring, and retrieving high-cardinality memory objects with predictable latency and horizontal scalability.
+Helios Memory Substrate is an early-stage Python prototype for a cognitive memory substrate. The long-term goal is to support long-context AI systems, agentic workflows, and large-scale retrieval through tiered memory, ingestion, scoring, persistence, and future distributed coordination.
+
+The current repository contains the foundation only: a validated importance-scoring core, a basic ingestion agent, a production node shell, tests, and CI. Distributed clustering, vector retrieval, persistence, replication, compression, and observability are planned work rather than completed features.
 
 ## Vision
 
-Helios is built to solve one problem:
-LLMs need memory systems that behave like cognition, not storage.
+Helios is built around one idea:
 
-The substrate is designed for:
+LLMs need memory systems that behave more like cognition, not just storage.
+
+The substrate is intended for:
+
 - Autonomous agents
 - Long-running workflows
 - Multi-agent orchestration
@@ -18,49 +19,127 @@ The substrate is designed for:
 - Real-time vector retrieval
 - Distributed memory clusters
 
+## Current Implementation Status
+
+Implemented:
+
+- `VectorRecord` data model
+- Validated importance score calculation
+- Basic `QuarkIngestionAgent`
+- Basic `HeliosProductionNode`
+- Pytest test suite
+- GitHub Actions CI workflow
+
+Partially implemented:
+
+- Node status reporting
+- Ingestion normalization
+- Local storage directory initialization
+
+Planned:
+
+- Persistent storage
+- Vector retrieval
+- Distributed clustering
+- Node-to-node replication
+- Memory compression
+- Observability and benchmark reporting
+
 ## Core Architecture
 
 ### 1. Quark Ingestion Layer
-- UUID assignment
-- Timestamping
+
+Current:
+
+- Normalizes incoming memory text
+- Assigns UUIDs
+- Adds UTC creation timestamps
+- Rejects empty content
+
+Planned:
+
 - Batch ingestion
+- Metadata extraction
 - Pre-processing for vectorization
+- Persistence hooks
 
 ### 2. Helios Distributed Core
+
+Current:
+
+- Maintains cluster state placeholder
+- Calculates importance scores using similarity, tier, age, and drift factor
+- Validates invalid similarity and age values
+
+Planned:
+
 - Cluster-aware memory distribution
-- Importance scoring
-- Drift-aware decay
+- Drift-aware decay refinements
 - Tiered memory retention
+- Retrieval scoring
 - p99/p55 latency tracking
 
 ### 3. Production Node Layer
+
+Current:
+
 - Node identity
-- Storage path management
-- Node-level health/status reporting
-- Integration with ingestion and core layers
+- Storage path creation
+- Node status reporting
+- Integration with core and ingestion layer
 
-## Key Features
+Planned:
 
-- Distributed memory substrate
-- Importance-based retention
-- Tiered storage model
-- Vector-based scoring
-- Drift-aware decay
-- High-cardinality ingestion
-- Horizontal scalability
-- Low-latency retrieval
+- Health checks
+- Persistent node state
+- Node-to-node replication
+- Observability events
 
 ## Installation
 
-git clone https://github.com/tpappy83/Helios-Memory-Substrate-1.1
+```bash
+git clone https://github.com/Helios-Memory-System/Helios-Memory-Substrate-1.1.git
 cd Helios-Memory-Substrate-1.1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 ## Usage Example
 
+```python
 from production_node import HeliosProductionNode
 
 node = HeliosProductionNode(node_id="node-1", storage_path="./data")
 print(node.get_status())
+
+record = node.ingestor.ingest("This is a memory object.")
+print(record)
+```
+
+## Testing
+
+Helios Memory Substrate uses pytest for testing.
+
+Run all tests:
+
+```bash
+pytest -v
+```
+
+Generate a coverage report:
+
+```bash
+pytest --cov=. --cov-report=term-missing
+```
+
+Test directory structure:
+
+```text
+tests/
+├── test_helios_core.py
+├── test_production_node.py
+└── test_quark_ingest.py
+```
 
 ## Contributing
 
@@ -68,65 +147,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ## Security
 
-See SECURITY.md for vulnerability reporting instructions.
+See [SECURITY.md](SECURITY.md) for vulnerability reporting instructions.
 
 ## Roadmap
 
-See ROADMAP.md for planned milestones.
+See [ROADMAP.md](ROADMAP.md) for planned milestones.
 
 ## License
 
 This project is licensed under the **PolyForm Noncommercial License 1.0.0** with the **Commons Clause** condition.
 
-- Non-commercial use (research, personal projects, education, open-source) is freely permitted.
-- Commercial use — including selling, hosting as a service, or incorporating into a commercial product — is **prohibited** without a separate commercial license from Travis Papenbrock.
+- Non-commercial use such as research, personal projects, education, and open-source experimentation is permitted under the license terms.
+- Commercial use, including selling, hosting as a service, or incorporating into a commercial product, is prohibited without a separate commercial license from Travis Papenbrock.
 
 See [LICENSE](LICENSE) for the full terms. To inquire about a commercial license, contact tpapenb@iu.edu.
-## Testing
-
-Helios Memory Substrate uses pytest for testing.
-
-### Running the Test Suite
-
-1. Install dependencies:
-   pip install -r requirements.txt
-
-2. Run all tests:
-   pytest -v
-[CONTRIBUTING.md](CONTRIBUTING.md)
-3. Run a specific test file:
-   pytest tests/test_production_node.py
-
-4. Generate a coverage report:
-   pytest --cov=.
-
-### Test Directory Structure
-
-tests/
-├── test_helios_core.py
-├── test_production_node.py
-└── test_quark_ingest.py
-
-## Contributing and Collaboration
-
-Contributions are welcome and encouraged. To contribute:
-
-1. Fork the repository.
-2. Create a feature branch:
-   git checkout -b feature/my-feature
-3. Commit your changes with clear messages.
-4. Push your branch:
-   git push origin feature/my-feature
-5. Open a Pull Request.
-
-### Collaboration Guidelines
-
-- Use Issues to report bugs or request features.
-- Use Discussions for architectural questions or design proposals.
-- Follow the coding style and testing requirements in CONTRIBUTING.md.
-- Be respectful and constructive in all interactions.
-
-### Communication
-
-For questions or collaboration proposals, contact:
-tpapenb@iu.edu
