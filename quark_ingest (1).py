@@ -2,6 +2,7 @@
 import uuid
 from datetime import datetime
 
+
 class QuarkIngestionAgent:
     def __init__(self, window=60):
         self.window = window
